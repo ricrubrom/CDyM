@@ -96,6 +96,8 @@ Describa todos los operadores lógicos de C. ¿cúal es la diferencia entre los 
 |   <<=    | LEFT SHIFT ASSIGNMENT  |
 |   >>=    | RIGHT SHIFT ASSIGNMENT |
 
+- Una mascara de bits es un patron predeterminado de bits, que al aplicarles una compuerta logica a un dato y esta mascara permite manejar el dato de manera precisa.
+
 ## F)
 
 ¿Qué es un prototipo de función en C? ¿Cuáles son las alternativas para pasar argumentos a una función? ¿Cómo se retorna un valor desde una función?
