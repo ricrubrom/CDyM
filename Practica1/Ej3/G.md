@@ -1,0 +1,1 @@
+- PORTC &= !((1<< PORTC0) | (1<< PORTC2) | (1<< PORTC3));

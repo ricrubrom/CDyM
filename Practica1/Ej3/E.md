@@ -1,0 +1,4 @@
+- DDRC=0x0F
+  - Setea los primeros 4 pines como salida y los últimos 4 como entrada
+- PORTC=0x0C
+  - Setea el pin 2 y 3 en alto, dejando los demás en bajo
