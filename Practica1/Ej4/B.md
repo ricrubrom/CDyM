@@ -1,0 +1,2 @@
+- Hace un retardo de x ms
+- Tiene un retardo máximo de 262.14 ms / F_CPU en MHz.
