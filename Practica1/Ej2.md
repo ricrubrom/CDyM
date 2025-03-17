@@ -47,7 +47,8 @@ Detalle las características de la CPU AVR, incluyendo: Arquitectura de la CPU (
 
 - Arquitectura
   - Harvard modificado RISC (Buses separados para instrucciones y datos)
-- ## Modelo de Programación
+- Modelo de Programación
+  - Se programa en C o assembler
 - Modos de direccionamiento
   - Inmediato
   - Directo
