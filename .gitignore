@@ -3,3 +3,26 @@
 build
 .vscode
 *.workspace
+*.xml
+
+# Build artifacts
+*.o
+*.d
+*.elf
+*.hex
+*.eep
+*.map
+*.srec
+*.lss
+Makefile
+*.mk
+
+# Backup and temporary files
+*.workspace
+*.atsuo
+*/Project Backups/*
+
+# IDE-specific files
+.vs/
+*.cproj
+*.atsln
