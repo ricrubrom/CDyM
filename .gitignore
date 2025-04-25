@@ -20,7 +20,7 @@ Makefile
 # Backup and temporary files
 *.workspace
 *.atsuo
-*/Project Backups/*
+Project Backups
 
 # IDE-specific files
 .vs/
