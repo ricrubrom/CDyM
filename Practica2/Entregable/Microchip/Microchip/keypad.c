@@ -1,8 +1,9 @@
-/*
- * keypad.c
+/**
+ * @file keypad.c
+ * @brief Implementación del manejo de teclado matricial 4x4.
  *
- * Created: 29/4/2025 14:12:31
- *  Author: mater
+ * Este módulo permite inicializar el teclado y escanear teclas presionadas,
+ * detectando nuevos eventos mediante flancos de bajada.
  */
 
 #include "lcd.h"
@@ -10,7 +11,7 @@
 #include <stdint.h>
 #include "keypad.h"
 
-// Definición del teclado matricial
+// Tabla de correspondencia entre índices de fila/columna y caracteres
 const uint8_t keypad_keys[16] = {
     '1', '2', '3', 'A',
     '4', '5', '6', 'B',
@@ -18,7 +19,9 @@ const uint8_t keypad_keys[16] = {
     '*', '0', '#', 'D'};
 
 /**
- * @brief Inicializa el teclado matricial
+ * @brief Inicializa los pines del teclado matricial.
+ *
+ * Configura las filas como salidas y las columnas como entradas con resistencias pull-up activadas.
  */
 void KEYPAD_init(void)
 {
@@ -32,13 +35,16 @@ void KEYPAD_init(void)
 }
 
 /**
- * @brief Escanea el teclado matricial en busca de teclas presionadas
- * @param key Puntero para almacenar la tecla detectada
- * @return 1 si se detectó un flanco de bajada (nueva tecla presionada), 0 en caso contrario
+ * @brief Escanea el teclado matricial en busca de teclas presionadas.
+ *
+ * Detecta una nueva tecla presionada mediante flanco de bajada. Retorna la tecla por referencia.
+ *
+ * @param key Puntero para almacenar el carácter de la tecla detectada.
+ * @return 1 si se detectó una nueva tecla presionada, 0 en caso contrario.
  */
 uint8_t KEYPAD_scan(uint8_t *key)
 {
-  static uint8_t last_key = 0xFF; // Guarda la tecla previa (sin presionar al inicio)
+  static uint8_t last_key = 0xFF; // Última tecla detectada
   uint8_t current_key = 0xFF;
 
   for (uint8_t row = 0; row < 4; row++)
@@ -64,9 +70,9 @@ uint8_t KEYPAD_scan(uint8_t *key)
       break;
     }
 
-    _delay_us(DEBOUNCE_DELAY_US); // Espera para estabilización
+    _delay_us(DEBOUNCE_DELAY_US); // Pequeña espera para rebotes
 
-    // Escanear columnas (activas en LOW)
+    // Escanear columnas (LOW activa)
     if (!(PIND & (1 << COLA)))
     {
       current_key = keypad_keys[row * 4];
@@ -89,7 +95,7 @@ uint8_t KEYPAD_scan(uint8_t *key)
     }
   }
 
-  // Detectar flanco de bajada (nueva tecla distinta a la anterior)
+  // Detectar flanco de bajada (nueva tecla diferente a la anterior)
   if (current_key != 0xFF && current_key != last_key)
   {
     *key = current_key;
@@ -97,11 +103,11 @@ uint8_t KEYPAD_scan(uint8_t *key)
     return 1;
   }
 
-  // Si no se presiona ninguna tecla, reiniciar el estado
+  // Si no se detecta ninguna tecla, reiniciar estado
   if (current_key == 0xFF)
   {
     last_key = 0xFF;
   }
 
-  return 0; // No se detectó nueva tecla
+  return 0;
 }
