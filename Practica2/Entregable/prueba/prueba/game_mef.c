@@ -17,13 +17,6 @@
 #include "game_mef.h"
 #include "game_utils.h"
 
-volatile GameState gameState = START;
-volatile uint8_t tick = 0;
-volatile uint8_t second = 0;
-volatile uint8_t gameTick = 0;
-volatile uint8_t gameSecond = 0;
-volatile uint8_t temporization_flag = 0;
-
 uint8_t keyPressed = -1;
 uint8_t *password = NULL;
 uint8_t xPosition = 0;

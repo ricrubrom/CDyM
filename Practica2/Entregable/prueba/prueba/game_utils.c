@@ -11,6 +11,13 @@
 #include "lcd.h"
 #include "game_utils.h"
 
+volatile GameState gameState = START;
+volatile uint8_t tick = 0;
+volatile uint8_t second = 0;
+volatile uint8_t gameTick = 0;
+volatile uint8_t gameSecond = 0;
+volatile uint8_t temporization_flag = 0;
+
 /**
  * @brief Inicializa el temporizador Timer0 en modo CTC.
  *
