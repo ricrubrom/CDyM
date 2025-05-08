@@ -4,6 +4,7 @@ build
 .vscode
 *.workspace
 *.xml
+*.zip
 
 # Build artifacts
 *.o
