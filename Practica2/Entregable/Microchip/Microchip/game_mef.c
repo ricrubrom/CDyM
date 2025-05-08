@@ -1,14 +1,3 @@
-/**
- * @file game_mef.c
- * @brief Implementación de la máquina de estados del juego de ingreso de contraseñas.
- *
- * Este módulo contiene la lógica de control principal del juego, implementada como una
- * máquina de estados finitos. El juego consiste en mostrar una contraseña aleatoria,
- * permitir que el usuario intente ingresarla desde el teclado y verificarla carácter
- * por carácter. Los estados posibles incluyen inicio, muestra de contraseña, juego,
- * acierto, error, victoria y derrota.
- */
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -38,12 +27,6 @@ const uint8_t *dicc[] = {
     "PiAno", "PrYKe", "RUEDa", "SERIE", "SalUd", "Salud",
     "Silla", "Tecla", "Valor", "Verde", "YnHRz", "hARdD", "silla"};
 
-/**
- * @brief Ejecuta un paso de la máquina de estados del juego.
- *
- * Según el estado actual del juego, delega el control a la función correspondiente.
- * Esta función debe ser llamada periódicamente, idealmente desde el lazo principal.
- */
 void game_mef(void)
 {
     if (temporization_flag)
@@ -81,12 +64,6 @@ void game_mef(void)
     }
 }
 
-/**
- * @brief Maneja el estado de inicio del juego.
- *
- * Espera que el usuario presione '*' para iniciar una nueva partida. Selecciona
- * una contraseña aleatoria del diccionario y la muestra por pantalla.
- */
 void handle_start_state(void)
 {
     keyPressed = -1;
@@ -110,12 +87,6 @@ void handle_start_state(void)
     }
 }
 
-/**
- * @brief Maneja el estado de visualización de la contraseña.
- *
- * Espera un tiempo determinado para mostrar la contraseña y luego
- * inicializa las variables del juego y cambia al estado de juego.
- */
 void handle_show_password_state(void)
 {
     if (second >= 2)
@@ -137,13 +108,6 @@ void handle_show_password_state(void)
     }
 }
 
-/**
- * @brief Maneja el estado principal del juego.
- *
- * Escanea el teclado para recibir la entrada del usuario. Si se presiona '#',
- * se compara la entrada con el carácter correspondiente de la contraseña.
- * Si es correcto se cambia al estado HIT, si es incorrecto, al estado MISS.
- */
 void handle_game_state(void)
 {
     if (gameState == GAME)
@@ -171,12 +135,6 @@ void handle_game_state(void)
     }
 }
 
-/**
- * @brief Maneja el estado de acierto (HIT).
- *
- * Actualiza la pantalla y las variables para pasar al siguiente carácter
- * de la contraseña. Si se completa la contraseña, cambia al estado WIN.
- */
 void handle_hit_state(void)
 {
     xPosition++;
@@ -210,12 +168,6 @@ void handle_hit_state(void)
     }
 }
 
-/**
- * @brief Maneja el estado de error (MISS).
- *
- * Resta una vida, actualiza el display y verifica si se terminó el juego.
- * Si no quedan vidas, cambia al estado LOSE.
- */
 void handle_miss_state(void)
 {
     currentKey = 0;
@@ -240,11 +192,6 @@ void handle_miss_state(void)
     }
 }
 
-/**
- * @brief Maneja el estado de victoria (WIN).
- *
- * Espera unos segundos y vuelve al estado de inicio.
- */
 void handle_win_state(void)
 {
     if (second >= 5)
@@ -258,11 +205,6 @@ void handle_win_state(void)
     }
 }
 
-/**
- * @brief Maneja el estado de derrota (LOSE).
- *
- * Espera unos segundos y vuelve al estado de inicio.
- */
 void handle_lose_state(void)
 {
     if (second >= 5)

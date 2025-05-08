@@ -28,17 +28,17 @@
 #define LDP1 PORTB // define MCU port connected to LCD data pins
 #define LDP2 PORTC // define MCU port connected to LCD data pins
 #define LCP PORTD  // define MCU port connected to LCD control pins
-#define LDDR1                                                                  \
+#define LDDR1 \
   DDRB // define MCU direction register for port connected to LCD data pins
-#define LDDR2                                                                  \
+#define LDDR2 \
   DDRC // define MCU direction register for port connected to LCD data pins
-#define LCDR                                                                   \
+#define LCDR \
   DDRD // define MCU direction register for port connected to LCD control pins
 
-#define LCD_DATAWR(Data)                                                       \
-  {                                                                            \
-    PORTB = (PORTB & 0xF9) | ((Data & 0x40) >> 4) | ((Data & 0X80) >> 6);      \
-    PORTC = (PORTC & 0xF9) | ((Data & 0X10) >> 3) | ((Data & 0X20) >> 3);      \
+#define LCD_DATAWR(Data)                                                  \
+  {                                                                       \
+    PORTB = (PORTB & 0xF9) | ((Data & 0x40) >> 4) | ((Data & 0X80) >> 6); \
+    PORTC = (PORTC & 0xF9) | ((Data & 0X10) >> 3) | ((Data & 0X20) >> 3); \
   }
 
 #define LCD_CLR 0             // DB0: clear display
@@ -81,7 +81,7 @@ void LCDhome(void);                      // LCD cursor home
 void LCDstring(uint8_t *, uint8_t);      // Outputs string to LCD
 void LCDGotoXY(uint8_t, uint8_t);        // Cursor to X Y position
 void CopyStringtoLCD(const uint8_t *, uint8_t,
-                     uint8_t); // copies flash string to LCD at x,y
+                     uint8_t);                // copies flash string to LCD at x,y
 void LCDdefinechar(const uint8_t *, uint8_t); // write char to LCD CGRAM
 void LCDshiftRight(uint8_t);                  // shift by n characters Right
 void LCDshiftLeft(uint8_t);                   // shift by n characters Left

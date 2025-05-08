@@ -12,9 +12,9 @@
 
 // Definición del teclado matricial
 const uint8_t keypad_keys[16] = {
-    '7', '8', '9', 'A',
+    '1', '2', '3', 'A',
     '4', '5', '6', 'B',
-    '1', '2', '3', 'C',
+    '7', '8', '9', 'C',
     '*', '0', '#', 'D'};
 
 /**
@@ -34,10 +34,13 @@ void KEYPAD_init(void)
 /**
  * @brief Escanea el teclado matricial en busca de teclas presionadas
  * @param key Puntero para almacenar la tecla detectada
- * @return 1 si se detectó una tecla, 0 en caso contrario
+ * @return 1 si se detectó un flanco de bajada (nueva tecla presionada), 0 en caso contrario
  */
 uint8_t KEYPAD_scan(uint8_t *key)
 {
+  static uint8_t last_key = 0xFF; // Guarda la tecla previa (sin presionar al inicio)
+  uint8_t current_key = 0xFF;
+
   for (uint8_t row = 0; row < 4; row++)
   {
     // Activar todas las filas (HIGH)
@@ -66,25 +69,39 @@ uint8_t KEYPAD_scan(uint8_t *key)
     // Escanear columnas (activas en LOW)
     if (!(PIND & (1 << COLA)))
     {
-      *key = keypad_keys[row * 4];
-      return 1;
+      current_key = keypad_keys[row * 4];
+      break;
     }
     if (!(PIND & (1 << COLB)))
     {
-      *key = keypad_keys[row * 4 + 1];
-      return 1;
+      current_key = keypad_keys[row * 4 + 1];
+      break;
     }
     if (!(PIND & (1 << COLC)))
     {
-      *key = keypad_keys[row * 4 + 2];
-      return 1;
+      current_key = keypad_keys[row * 4 + 2];
+      break;
     }
     if (!(PIND & (1 << COLD)))
     {
-      *key = keypad_keys[row * 4 + 3];
-      return 1;
+      current_key = keypad_keys[row * 4 + 3];
+      break;
     }
   }
 
-  return 0; // No se detectó tecla presionada
+  // Detectar flanco de bajada (nueva tecla distinta a la anterior)
+  if (current_key != 0xFF && current_key != last_key)
+  {
+    *key = current_key;
+    last_key = current_key;
+    return 1;
+  }
+
+  // Si no se presiona ninguna tecla, reiniciar el estado
+  if (current_key == 0xFF)
+  {
+    last_key = 0xFF;
+  }
+
+  return 0; // No se detectó nueva tecla
 }

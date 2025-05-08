@@ -20,11 +20,10 @@
 
 // Constantes
 #define DEBOUNCE_DELAY_US 5
-#define SCAN_DELAY_MS 100
 #define MAX_CHARS_LINE_1 16
 #define MAX_CHARS_LINE_2 32
 
 uint8_t KEYPAD_scan(uint8_t *key); // Escanea el teclado matricial
-void KEYPAD_init(void);         // Inicializa el teclado matricial
+void KEYPAD_init(void);            // Inicializa el teclado matricial
 
 #endif /* KEYPAD_H_ */
