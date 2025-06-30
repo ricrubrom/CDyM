@@ -91,7 +91,7 @@ Describa todos los operadores lógicos de C. ¿cúal es la diferencia entre los 
 |    <<    |       LEFT SHIFT       |
 |    >>    |      RIGHT SHIFT       |
 |    &=    | BITWISE AND ASSIGNMENT |
-|   \|>    | BITWISE OR ASSIGNMENT  |
+|   \|=    | BITWISE OR ASSIGNMENT  |
 |    ^=    | BITWISE XOR ASSIGNMENT |
 |   <<=    | LEFT SHIFT ASSIGNMENT  |
 |   >>=    | RIGHT SHIFT ASSIGNMENT |
